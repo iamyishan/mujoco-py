@@ -22,8 +22,8 @@ xml_content = """
         <!-- 定义地面：类型为平面，大小为 2x2 米，颜色为灰色 -->
         <geom name="ground" type="plane" size="2 2 0.1" rgba=".9 .9 .9 1"/>
         
-        <!-- 定义一个小球刚体：初始位置在 z=1.5 米高处 -->
-        <body name="ball" pos="0 0 1.5">
+        <!-- 定义一个小球刚体：初始位置在 z=2.0 米高处 -->
+        <body name="ball" pos="0 0 2.0">
             <!-- 自由关节让该刚体在 3D 空间中拥有 6 个自由度 (可以自由下落、旋转) -->
             <joint type="free"/>
             <!-- 小球的几何外形：球体，半径 0.15 米，颜色为绿色，质量为 1 kg -->
@@ -72,10 +72,10 @@ def main():
             if time_until_next_step > 0:
                 time.sleep(time_until_next_step)
                 
-            # 每隔约 1 秒在终端打印一下小球的实时 Z 轴高度
-            # data.qpos[2] 代表自由关节 Z 轴的位置（0, 1 分别为 X, Y 轴，3~6 为四元数姿态）
-            if int(data.time) > 0 and int(data.time * 100) % 100 == 0:
-                    print(f"仿真时间: {data.time:.2f}s | 小球高度 (Z): {data.qpos[2]:.4f}m")
+            # 每隔约 0.1 秒在终端打印一下小球的实时 Z 轴高度
+            # 通过判断仿真时间是否跨越了 0.1 秒的整数倍边界来触发打印，避免浮点数精度带来的漏打或多打
+            if int(data.time * 10) > int((data.time - model.opt.timestep) * 10):
+                print(f"仿真时间: {data.time:.2f}s | 小球高度 (Z): {data.qpos[2]:.4f}m")
 
 if __name__ == "__main__":
     main()

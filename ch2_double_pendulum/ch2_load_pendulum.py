@@ -32,7 +32,7 @@ def main():
     # 45 度 = 45 * pi / 180 ≈ 0.7854 弧度
     data.qpos[0] = 1.5708  # 设置第一个关节 (joint1) 的初始角度为 90 度
     data.qpos[1] = 0.7854  # 设置第二个关节 (joint2) 的初始角度为 45 度
-
+  
     # 4. 启动被动渲染器
     print("正在拉起三维仿真窗口，请观察双摆在重力作用下的混沌摆动...")
     with mujoco.viewer.launch_passive(model, data) as viewer:
@@ -52,7 +52,8 @@ def main():
                 time.sleep(time_until_next_step)
                 
             # 每隔 1.0 秒打印一次两关节的实时角度（转换为度数显示）
-            if int(data.time * 100) % 100 == 0:
+            # 使用时间跨越边界判定，保证每秒只打印一次，避免重复打印
+            if int(data.time) > int(data.time - model.opt.timestep):
                 joint1_deg = data.qpos[0] * 180.0 / 3.1415926
                 joint2_deg = data.qpos[1] * 180.0 / 3.1415926
                 print(f"时间: {data.time:.1f}s | 关节1角度: {joint1_deg:6.1f}° | 关节2角度: {joint2_deg:6.1f}°")

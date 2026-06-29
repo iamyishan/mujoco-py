@@ -110,8 +110,9 @@ def main():
             if time_until_next_step > 0:
                 time.sleep(time_until_next_step)
                 
-            # 每隔 0.2 秒在控制台打印一次状态
-            if int(data.time * 500) % 100 == 0:
+            # 每隔约 0.2 秒在控制台打印一次状态
+            # 使用时间跨越边界判定，保证每 0.2 秒只打印一次，且避免重复打印
+            if int(data.time * 5) > int((data.time - model.opt.timestep) * 5):
                 print(f"时间: {data.time:.3f}s | "
                       f"Z位置(qpos): {z_pos_q:.3f}m | "
                       f"Z位置(xpos): {z_pos_x:.3f}m | "
@@ -139,6 +140,11 @@ def main():
     
     # Z轴加速度曲线
     axs[2].plot(time_log, z_acc_log, label="Z Acceleration (qacc)", color="green", linewidth=2)
+    # 使用对称对数刻度 (symlog) 以同时清晰展现自由落体时的重力加速度 (-9.81 m/s²) 与碰撞瞬间的巨大脉冲值 (~1000 m/s²)
+    axs[2].set_yscale('symlog', linthresh=10)
+    axs[2].set_yticks([-10, 0, 10, 100, 1000])
+    axs[2].set_yticklabels(["-10", "0", "10", "100", "1000"])
+    axs[2].set_ylim(-15, 1500)
     axs[2].set_xlabel("Time (s)", fontsize=11)
     axs[2].set_ylabel("Acceleration (m/s²)", fontsize=11)
     axs[2].grid(True, linestyle="--", alpha=0.6)
