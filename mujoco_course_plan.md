@@ -18,7 +18,7 @@
 *   **实战内容**：
     *   搭建 Python 虚拟环境并安装官方 `mujoco` 库。
     *   编写第一个 Hello World 脚本，加载极简 XML 并拉起仿真渲染器。
-*   **代码输出**：`ch1_hello_mujoco.py`
+*   **代码输出**：[ch1_hello_mujoco.py](file:///d:/code/learning/mujoco-py/ch1_hello_mujoco/ch1_hello_mujoco.py)
 
 ### 第二章：MJCF 建模语言与模型构建
 *   **学习目标**：掌握 MJCF（MuJoCo XML）语法，能够自己动手建立机器人/刚体物理模型。
@@ -29,7 +29,7 @@
 *   **实战内容**：
     *   从零编写一个双摆（Double Pendulum）的 XML 配置文件。
     *   为双摆配置不同的关节阻尼（`damping`）和摩擦（`friction`）。
-*   **代码输出**：`ch2_double_pendulum.xml`，`ch2_load_pendulum.py`
+*   **代码输出**：[ch2_double_pendulum.xml](file:///d:/code/learning/mujoco-py/ch2_double_pendulum/ch2_double_pendulum.xml)，[ch2_load_pendulum.py](file:///d:/code/learning/mujoco-py/ch2_double_pendulum/ch2_load_pendulum.py)
 
 ### 第三章：Python API 基础与状态获取
 *   **学习目标**：深入理解 Python 仿真控制循环，学会实时读取物体的状态数据（位置、速度、加速度等）。
@@ -43,7 +43,7 @@
 *   **实战内容**：
     *   编写一个小球自由落体的仿真。
     *   实时打印并使用 `matplotlib` 绘制小球的高度随时间变化的曲线。
-*   **代码输出**：`ch3_free_drop.py`
+*   **课程材料**：[原理文档：ch3_python_api_principles.md](file:///d:/code/learning/mujoco-py/ch3_free_drop/ch3_python_api_principles.md) | **代码输出**：[ch3_free_drop.py](file:///d:/code/learning/mujoco-py/ch3_free_drop/ch3_free_drop.py)
 
 ### 第四章：执行器与关节控制 (Actuators & Control)
 *   **学习目标**：学会让模型“动起来”，掌握如何给关节施加驱动力，以及如何实现基础的控制算法（如 PID）。
